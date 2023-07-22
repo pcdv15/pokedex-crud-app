@@ -38,6 +38,18 @@ class PokemonSerializer(serializers.ModelSerializer):
             PokemonType.objects.create(pokemon=instance, type=type)
             
         return instance
+    
+    def validate_types(self, types):
+        type_names = [type.get('type') for type in types]
+
+        if len(types) <= 0:
+            raise serializers.ValidationError("Must include at least one or two Pokemon types.")
+        if len(types) > 2:
+            raise serializers.ValidationError("Pokemon types cannot be more than two.")
+        if len(type_names) != len(set(type_names)):
+            raise serializers.ValidationError("Pokemon types must be unique.")
+
+        return types
 
 
 
