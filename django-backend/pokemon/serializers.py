@@ -22,7 +22,7 @@ class PokemonListSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
-class PokemonRetrieveSerializer(serializers.ModelSerializer):
+class PokemonRetrieveSerializer(PokemonSerializer):
     class Meta:
         model = Pokemon
         fields = "__all__"
