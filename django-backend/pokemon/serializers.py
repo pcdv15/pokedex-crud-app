@@ -25,17 +25,20 @@ class PokemonSerializer(serializers.ModelSerializer):
         return pokemon
     
     def update(self, instance, validated_data):
-        types = [data['type'] for data in validated_data.pop('pokemontype_set')]
+        types = []
+        if(validated_data.get('pokemontype_set')):
+            types = [data['type'] for data in validated_data.pop('pokemontype_set')]
         instance.name = validated_data.get('name', instance.name)
         instance.height = validated_data.get('height', instance.height)
         instance.weight = validated_data.get('weight', instance.weight)
         instance.image_url = validated_data.get('image_url', instance.image_url)
         instance.save()
+        
+        if types:
+            PokemonType.objects.filter(pokemon=instance).delete()
 
-        PokemonType.objects.filter(pokemon=instance).delete()
-
-        for type in types:
-            PokemonType.objects.create(pokemon=instance, type=type)
+            for type in types:
+                PokemonType.objects.create(pokemon=instance, type=type)
             
         return instance
     
