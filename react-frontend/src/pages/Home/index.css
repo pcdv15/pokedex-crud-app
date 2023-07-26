@@ -1,0 +1,8 @@
+.custom-bg {
+  @apply w-[40vw] h-[40vh] opacity-[0.05] absolute z-0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  pointer-events: none;
+}
