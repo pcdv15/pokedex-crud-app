@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteRequest, getRequest } from "@app/api/axiosService";
 import ListItem from "@app/components/ListItem";
 import BasicPagination from "@app/components/BasicPagination";
@@ -64,7 +64,9 @@ const PokemonList = () => {
 
   return (
     <>
-      <Button className="self-center mt-10">Create New Pokemon</Button>
+      <Link className="self-center mt-10" to="pokemon/create">
+        <Button>Create New Pokemon</Button>
+      </Link>
       <div className="self-center mt-16 z-10">
         {pokemons.map((p: Pokemon) => (
           <ListItem label={p.name} onClick={() => gotoPokemon(p.id)} key={p.id}>
