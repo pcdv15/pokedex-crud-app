@@ -33,8 +33,8 @@ class Command(BaseCommand):
 
             if pokemon_list_response.status_code == 200:
                 pokemon_list = pokemon_list_response.json()
+                count = 1
                 for pokemon in pokemon_list['results']:
-                    count = 1
 
                     # Get individual Pokemon details
                     pokemon_details_response = requests.get(pokemon["url"])
