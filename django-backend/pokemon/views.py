@@ -23,6 +23,7 @@ class PokemonViewSet(viewsets.ModelViewSet):
     custom_action_serializer = {
         'list': PokemonListSerializer,
         'retrieve': PokemonRetrieveSerializer,
+        'create': PokemonRetrieveSerializer,
     }
 
     def get_serializer_class(self):
